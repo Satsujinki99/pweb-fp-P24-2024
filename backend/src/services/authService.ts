@@ -2,6 +2,7 @@ import User from "../models/user";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
+
 class AuthService {
   async login(authData: {
     username: string;
@@ -29,6 +30,34 @@ class AuthService {
     );
 
     return { user: { username: user.username, role: user.role }, token };
+  }
+
+  async register(registerData: {
+    username: string;
+    password: string;
+    role?: string;
+  }): Promise<{ username: string; role: string }> {
+    const { username, password, role } = registerData;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      throw new Error("Username already exists");
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new user
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      role: role || "USER", // Default to USER if no role is provided
+    });
+
+    await newUser.save();
+
+    return { username: newUser.username, role: newUser.role };
   }
 }
 
