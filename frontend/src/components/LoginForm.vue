@@ -14,14 +14,13 @@
   
   <script lang="ts">
   import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
   import axios from 'axios';
   
   export default {
-    setup() {
+    emits: ['login-success'],
+    setup(_, { emit }) {
       const username = ref('');
       const password = ref('');
-      const router = useRouter();
   
       const handleLogin = async () => {
         try {
@@ -32,11 +31,10 @@
   
           // Simpan token di localStorage
           localStorage.setItem('token', response.data.data.token);
-          // Navigasi ke homepage
-          router.push('/home');
+          // Emit event untuk memberi tahu bahwa login berhasil
+          emit('login-success');
         } catch (error) {
           if (axios.isAxiosError(error)) {
-            // Menangani kesalahan dari Axios
             alert(error.response?.data.message || 'Terjadi kesalahan saat login');
           } else {
             console.error('Terjadi kesalahan:', error);
@@ -49,28 +47,6 @@
   };
   </script>
   
-  <style scoped>
-  form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: auto;
-  }
-  
-  div {
-    margin-bottom: 15px;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
+  <style>
+  /* Tambahkan gaya sesuai kebutuhan */
   </style>
-  

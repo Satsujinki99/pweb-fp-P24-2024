@@ -15,9 +15,9 @@
     setup() {
       const router = useRouter();
       const username = computed(() => {
-        const userData = localStorage.getItem('token');
-        if (userData) {
-          const payload = JSON.parse(atob(userData.split('.')[1]));
+        const token = localStorage.getItem('token');
+        if (token) {
+          const payload = JSON.parse(atob(token.split('.')[1]));
           return payload.username; // Ambil username dari token
         }
         return '';
@@ -25,7 +25,7 @@
   
       const logout = () => {
         localStorage.removeItem('token');
-        router.push('/');
+        router.push('/'); // Kembali ke halaman login
       };
   
       return { username, logout };
