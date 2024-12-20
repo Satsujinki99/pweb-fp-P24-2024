@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar v-if="isLoggedIn" />
+    <Navbar v-if="isLoggedIn" @logout="handleLogout" />
     <div v-if="!isLoggedIn">
       <LoginForm @login-success="handleLoginSuccess" />
     </div>
@@ -28,7 +28,11 @@ export default {
       isLoggedIn.value = true;
     };
 
-    return { isLoggedIn, handleLoginSuccess };
+    const handleLogout = () => {
+      isLoggedIn.value = false; // Ubah status login menjadi false
+    };
+
+    return { isLoggedIn, handleLoginSuccess, handleLogout };
   },
 };
 </script>

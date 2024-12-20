@@ -8,11 +8,12 @@
   </template>
   
   <script lang="ts">
-  import { computed } from 'vue';
+  import { computed, defineComponent } from 'vue';
   import { useRouter } from 'vue-router';
   
-  export default {
-    setup() {
+  export default defineComponent({
+    emits: ['logout'],
+    setup(_, { emit }) {
       const router = useRouter();
       const username = computed(() => {
         const token = localStorage.getItem('token');
@@ -25,12 +26,13 @@
   
       const logout = () => {
         localStorage.removeItem('token');
+        emit('logout'); // Emit event logout
         router.push('/'); // Kembali ke halaman login
       };
   
       return { username, logout };
     },
-  };
+  });
   </script>
   
   <style scoped>
