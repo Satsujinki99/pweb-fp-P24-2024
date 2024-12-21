@@ -1,10 +1,12 @@
-import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/Home.vue";
-import LoginView from "../views/Login.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Login from '../views/Login.vue';
+import Home from '../views/Home.vue';
+import Rules from '../views/Rules.vue';
 
 const routes = [
-  { path: "/", name: "Home", component: HomeView },
-  { path: "/login", name: "Login", component: LoginView },
+  { path: '/', component: Login }, // Halaman login
+  { path: '/home', component: Home }, // Halaman home
+  { path: '/rules', component: Rules }, // Halaman aturan
 ];
 
 const router = createRouter({
