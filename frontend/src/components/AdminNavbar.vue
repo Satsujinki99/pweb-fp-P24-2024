@@ -1,9 +1,9 @@
 <template>
     <nav class="navbar">
       <ul>
-        <li><router-link to="/admin">Data Barang</router-link></li>
-        <li><router-link to="/admin/all-operator">Data Petugas</router-link></li>
-        <li><router-link to="/admin/summary">Data Peminjaman</router-link></li>
+        <li><router-link to="/operator">Data Barang</router-link></li>
+        <li><router-link to="/operator/all-operator">Data Petugas</router-link></li>
+        <li><router-link to="/operator/summary">Data Peminjaman</router-link></li>
         <li><router-link to="/login">Logout</router-link></li>
       </ul>
     </nav>
